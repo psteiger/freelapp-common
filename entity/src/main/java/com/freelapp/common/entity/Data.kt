@@ -1,7 +1,7 @@
 package com.freelapp.common.entity
 
 interface Data<T> where T : Data<T> {
-    val id: String
+    val id: Key
     val name: String
     val freq: Int
     val timestamp: Long
