@@ -1,6 +1,7 @@
 package com.freelapp.common.domain.usersearchmode.impl
 
 import com.freelapp.common.application.getlocationname.GetLocationName
+import com.freelapp.common.domain.annotation.WorldwideString
 import com.freelapp.common.domain.premiumuser.CheckPremiumStatusUseCase
 import com.freelapp.common.domain.premiumuser.BuyPremiumUseCase
 import com.freelapp.common.domain.usersearchmode.SetUserSearchModeUseCase
@@ -20,6 +21,7 @@ class SetUserSearchModeUseCaseImpl<UserType, DataType> @Inject constructor(
     private val checkPremiumStatusUseCase: CheckPremiumStatusUseCase,
     private val buyPremiumUseCase: BuyPremiumUseCase,
     private val snacker: Snacker,
+    @WorldwideString
     private val worldwideString: String,
     private val getLocationName: GetLocationName,
     private val userRepository: UserRepository<UserType, DataType>

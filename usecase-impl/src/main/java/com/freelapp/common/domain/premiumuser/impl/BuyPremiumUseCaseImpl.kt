@@ -1,6 +1,9 @@
 package com.freelapp.common.domain.premiumuser.impl
 
 import com.freelapp.common.application.askforinput.AskForSingleChoiceInput
+import com.freelapp.common.domain.annotation.ChooseSubscriptionPlanMessageString
+import com.freelapp.common.domain.annotation.ChooseSubscriptionPlanTitleString
+import com.freelapp.common.domain.annotation.IsAlreadySubscribedString
 import com.freelapp.common.domain.premiumuser.CheckPremiumStatusUseCase
 import com.freelapp.common.domain.premiumuser.BuyPremiumUseCase
 import com.freelapp.components.biller.entity.purchase.BillingFlow
@@ -16,8 +19,11 @@ class BuyPremiumUseCaseImpl @Inject constructor(
     private val billingFlow: BillingFlow,
     private val subscriptionSkus: Map<AcknowledgeableSku, Provider<String>>,
     private val askForSingleChoiceInput: AskForSingleChoiceInput<AcknowledgeableSku>,
+    @IsAlreadySubscribedString
     private val isAlreadySubscribedMsg: String,
+    @ChooseSubscriptionPlanTitleString
     private val chooseSubscriptionPlanTitle: String,
+    @ChooseSubscriptionPlanMessageString
     private val chooseSubscriptionPlanMsg: String
 ) : BuyPremiumUseCase {
 
