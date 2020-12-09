@@ -4,7 +4,7 @@ buildscript {
         kotlin_version = '1.4.20'
         kotlin_coroutines_version = '1.4.2'
         material_dialogs_version = '3.3.0'
-        biller_version = 'f27f3df1d0'
+        biller_version = 'd108905c99'
         snacker_version = '36e33f8548'
         maps_version = '3.1.0-beta'
         hilt_version = '2.30-alpha'
