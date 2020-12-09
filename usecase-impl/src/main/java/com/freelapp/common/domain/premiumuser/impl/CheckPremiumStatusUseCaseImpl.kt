@@ -13,7 +13,7 @@ import javax.inject.Inject
 class CheckPremiumStatusUseCaseImpl @Inject constructor(
     scope: CoroutineScope,
     purchaseStateOwner: PurchaseState.Owner,
-    private val premiumSkus: Set<AcknowledgeableSku>
+    private val premiumSkus: Set<@JvmSuppressWildcards AcknowledgeableSku>
 ) : CheckPremiumStatusUseCase {
 
     private val isSubscribed =
