@@ -45,9 +45,9 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
         ) { users, currentUser, show ->
             if (!show && currentUser != null && currentUser.data.isNotEmpty()) {
                 users.mapValues { (_, user) ->
-                    val currentUserData = currentUser.data
-                    val data = user.data
-                    user.clone(data - currentUserData.toHashSet())
+                    val currentUserDataIds = currentUser.data.map { it.id }
+                    val newData = user.data.filter { it.id !in currentUserDataIds }
+                    user.clone(newData)
                 }
             } else users
         }.flowOn(Dispatchers.Default)
