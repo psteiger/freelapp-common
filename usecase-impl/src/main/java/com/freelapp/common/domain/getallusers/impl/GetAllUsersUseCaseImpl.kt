@@ -4,7 +4,7 @@ import com.freelapp.common.domain.getallusers.GetAllUsersUseCase
 import com.freelapp.common.domain.getglobalusers.GetGlobalUsersUseCase
 import com.freelapp.common.domain.getnearbyusers.GetNearbyUsersUseCase
 import com.freelapp.common.domain.usersearchmode.GetUserSearchModeUseCase
-import com.freelapp.common.entity.Item
+import com.freelapp.common.entity.item.Item
 import com.freelapp.common.entity.Key
 import com.freelapp.common.entity.SearchMode
 import com.freelapp.common.entity.User
@@ -18,7 +18,7 @@ class GetAllUsersUseCaseImpl<UserType, DataType> @Inject constructor(
     private val getNearbyUsersUseCase: GetNearbyUsersUseCase<UserType, DataType>,
     private val getGlobalUsersUseCase: GetGlobalUsersUseCase<UserType, DataType>,
 ) : GetAllUsersUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
-                                                 DataType : Item<DataType> {
+                                                 DataType : Item {
 
     @ExperimentalCoroutinesApi
     override fun invoke(): Flow<Map<Key, UserType>> =

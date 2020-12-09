@@ -6,7 +6,7 @@ import com.freelapp.common.domain.premiumuser.CheckPremiumStatusUseCase
 import com.freelapp.common.domain.premiumuser.BuyPremiumUseCase
 import com.freelapp.common.domain.usersearchmode.SetUserSearchModeUseCase
 import com.freelapp.common.domain.usersearchradius.GetUserSearchRadiusUseCase
-import com.freelapp.common.entity.Item
+import com.freelapp.common.entity.item.Item
 import com.freelapp.common.entity.SearchMode
 import com.freelapp.common.entity.User
 import com.freelapp.common.repository.user.UserRepository
@@ -26,7 +26,7 @@ class SetUserSearchModeUseCaseImpl<UserType, DataType> @Inject constructor(
     private val getLocationName: GetLocationName,
     private val userRepository: UserRepository<UserType, DataType>
 ) : SetUserSearchModeUseCase where UserType : User<UserType, DataType>,
-                                   DataType : Item<DataType> {
+                                   DataType : Item {
 
     override fun invoke(searchMode: SearchMode) {
         scope.launch {

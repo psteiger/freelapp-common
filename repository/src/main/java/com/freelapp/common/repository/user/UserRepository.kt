@@ -1,10 +1,11 @@
 package com.freelapp.common.repository.user
 
 import com.freelapp.common.entity.*
+import com.freelapp.common.entity.item.Item
 import kotlinx.coroutines.flow.StateFlow
 
 interface UserRepository<UserType, DataType> where UserType : User<UserType, DataType>,
-                                                   DataType : Item<DataType> {
+                                                   DataType : Item {
 
     val globalUsers: StateFlow<Map<Key, UserType>>
     val nearbyUsers: StateFlow<Map<Key, UserType>>
