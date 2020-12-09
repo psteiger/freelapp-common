@@ -30,8 +30,6 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
         Timeline.MONTH to createTimeline(Timeline.MONTH),
     )
 
-    override fun invoke(): Map<Timeline, SharedFlow<List<DataType>>> = timelines
-
     private val now = Clock.System.now().toEpochMilliseconds()
 
     private val users: Flow<Map<Key, UserType>> =
@@ -99,6 +97,8 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
                 SharingStarted.WhileSubscribed(5000L),
                 1
             )
+
+    override fun invoke(): Map<Timeline, SharedFlow<List<DataType>>> = timelines
 
     private fun DataType?.playedAfter(timeAgo: Timeline): Boolean =
         this?.timestamp?.playedAfter(timeAgo) ?: false
