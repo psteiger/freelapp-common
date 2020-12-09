@@ -51,7 +51,7 @@ class GetDataTimelinesImpl<Owner, DataType>(
             .mapLatest { userMap ->
                 userMap
                     .values
-                    .flatMap { it.getData() }
+                    .flatMap { it.data }
             }
             .flowOn(Dispatchers.Default)
 
@@ -59,7 +59,7 @@ class GetDataTimelinesImpl<Owner, DataType>(
         combine(getUserSearchFilterUseCase()) { users, text ->
             if (text.isNotBlank()) {
                 users.mapValues { (_, owner) ->
-                    val data = owner.getData()
+                    val data = owner.data
                     val newData = data.filter { it.matchesQuery(text) }
                     if (data.size != newData.size) owner.clone(newData) else owner
                 }
@@ -72,10 +72,10 @@ class GetDataTimelinesImpl<Owner, DataType>(
             currentUserRepository.user,
             getHideShowOwnDataUseCase()
         ) { users, currentUser, show ->
-            if (!show && currentUser != null && currentUser.getData().isNotEmpty()) {
+            if (!show && currentUser != null && currentUser.data.isNotEmpty()) {
                 users.mapValues { (_, owner) ->
-                    val currentUserData = currentUser.getData()
-                    val data = owner.getData()
+                    val currentUserData = currentUser.data
+                    val data = owner.data
                     owner.clone(data - currentUserData.toHashSet())
                 }
             } else users
