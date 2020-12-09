@@ -40,7 +40,7 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType> @Inject constructor(
             .flowOn(Dispatchers.Default)
             .stateIn(
                 scope,
-                SharingStarted.WhileSubscribed(5000L),
+                SharingStarted.WhileSubscribed(replayExpirationMillis = 0),
                 emptyList()
             )
 
