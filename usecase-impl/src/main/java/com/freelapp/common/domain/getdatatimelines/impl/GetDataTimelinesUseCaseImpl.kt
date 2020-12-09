@@ -75,8 +75,8 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
 
     private fun createTimeline(timeline: Timeline): SharedFlow<List<DataType>> =
         items
-            .mapLatest { userMap ->
-                userMap
+            .mapLatest { latestItems ->
+                latestItems
                     .filter { it.playedAfter(timeline) }
                     .groupingBy { it }
                     .eachCount()

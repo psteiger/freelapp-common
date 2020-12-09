@@ -9,6 +9,12 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
 dependencies {
     implementation project(path: ':entity')
     implementation project(path: ':repository')
