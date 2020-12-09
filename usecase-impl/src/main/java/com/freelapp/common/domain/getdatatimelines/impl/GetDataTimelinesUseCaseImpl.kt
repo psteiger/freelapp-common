@@ -26,27 +26,6 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
 
     private val now = Clock.System.now().toEpochMilliseconds()
 
-    private val users: Flow<Map<Key, UserType>> =
-        getUserSearchModeUseCase()
-            .flatMapLatest {
-                when (it) {
-                    Mode.NEARBY -> userRepository.nearbyUsers
-                    Mode.WORLD -> userRepository.globalUsers
-                }
-            }
-            .filtered()
-            .hideShowOwnData()
-            .flowOn(Dispatchers.Default)
-
-    private val items: Flow<List<DataType>> =
-        users
-            .mapLatest { userMap ->
-                userMap
-                    .values
-                    .flatMap { it.data }
-            }
-            .flowOn(Dispatchers.Default)
-
     private fun Flow<Map<Key, UserType>>.filtered(): Flow<Map<Key, UserType>> =
         combine(getUserSearchFilterUseCase()) { users, text ->
             if (text.isNotBlank()) {
@@ -72,6 +51,27 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
                 }
             } else users
         }.flowOn(Dispatchers.Default)
+
+    private val users: Flow<Map<Key, UserType>> =
+        getUserSearchModeUseCase()
+            .flatMapLatest {
+                when (it) {
+                    Mode.NEARBY -> userRepository.nearbyUsers
+                    Mode.WORLD -> userRepository.globalUsers
+                }
+            }
+            .filtered()
+            .hideShowOwnData()
+            .flowOn(Dispatchers.Default)
+
+    private val items: Flow<List<DataType>> =
+        users
+            .mapLatest { userMap ->
+                userMap
+                    .values
+                    .flatMap { it.data }
+            }
+            .flowOn(Dispatchers.Default)
 
     private fun createTimeline(timeline: Timeline): SharedFlow<List<DataType>> =
         items
