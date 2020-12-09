@@ -24,12 +24,6 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
 ) : GetDataTimelinesUseCase<DataType> where UserType : User<UserType, DataType>,
                                             DataType : Item<DataType> {
 
-    private val timelines = mapOf(
-        Timeline.DAY to createTimeline(Timeline.DAY),
-        Timeline.WEEK to createTimeline(Timeline.WEEK),
-        Timeline.MONTH to createTimeline(Timeline.MONTH),
-    )
-
     private val now = Clock.System.now().toEpochMilliseconds()
 
     private val users: Flow<Map<Key, UserType>> =
@@ -97,6 +91,12 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
                 SharingStarted.WhileSubscribed(5000L),
                 1
             )
+
+    private val timelines = mapOf(
+        Timeline.DAY to createTimeline(Timeline.DAY),
+        Timeline.WEEK to createTimeline(Timeline.WEEK),
+        Timeline.MONTH to createTimeline(Timeline.MONTH),
+    )
 
     override fun invoke(): Map<Timeline, SharedFlow<List<DataType>>> = timelines
 
