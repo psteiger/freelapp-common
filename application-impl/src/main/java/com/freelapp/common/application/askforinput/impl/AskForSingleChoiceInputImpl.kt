@@ -8,18 +8,23 @@ import com.afollestad.materialdialogs.list.getListAdapter
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.freelapp.common.application.askforinput.AskForSingleChoiceInput
 import kotlinx.coroutines.suspendCancellableCoroutine
+import javax.inject.Provider
 import kotlin.coroutines.resume
 
 class AskForSingleChoiceInputImpl<T>(
     private val activity: Activity
 ) : AskForSingleChoiceInput<T> {
 
-    override suspend fun invoke(title: String, message: String, items: Map<T, String>): T? {
+    override suspend fun invoke(
+        title: String,
+        message: String,
+        items: Map<T, Provider<String>>
+    ): T? {
         val indexedItems = items.toIndexedMap()
         val selection = MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
-            listItemsSingleChoice(items = indexedItems.valuesValues)
+            listItemsSingleChoice(items = indexedItems.valuesValues.map { it.get() })
         }.awaitSelection() ?: return null
         return indexedItems.getValue(selection).key
     }
@@ -45,8 +50,3 @@ class AskForSingleChoiceInputImpl<T>(
             onDismiss { continuation.resume(selection) }
         }
 }
-
-/*
-                    "${subscriptionSku.price.value}/${activity.getString(R.string.month)}",
-                    "${premiumOnceSku.price.value} ${activity.getString(R.string.once)}",
- */
