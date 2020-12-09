@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
       <module name="freelapp-common.app" target="11" />
+      <module name="freelapp-common.application-impl" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

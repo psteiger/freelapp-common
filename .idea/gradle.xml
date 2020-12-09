@@ -10,6 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/application" />
+            <option value="$PROJECT_DIR$/application-impl" />
             <option value="$PROJECT_DIR$/entity" />
             <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/usecase" />

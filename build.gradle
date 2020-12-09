@@ -1,8 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext{
-        kotlin_version = "1.4.20"
-        kotlin_coroutines_version = "1.4.2"
+        kotlin_version = '1.4.20'
+        kotlin_coroutines_version = '1.4.2'
+        material_dialogs_version = '3.3.0'
+        biller_version = '9f43e61425'
+        snacker_version = '41827eadce'
     }
     repositories {
         google()
@@ -22,6 +25,7 @@ allprojects {
         google()
         jcenter()
         maven { url "https://kotlin.bintray.com/kotlinx/" } // soon will be just jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
