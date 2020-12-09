@@ -17,9 +17,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.datetime.Clock
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class GetDataTimelinesUseCaseImpl<UserType, DataType>(
+class GetDataTimelinesUseCaseImpl<UserType, DataType> @Inject constructor(
     private val scope: CoroutineScope,
     private val getAllItemsUseCase: GetAllItemsUseCase<DataType>,
     private val getCurrentUserUseCase: GetCurrentUserUseCase<UserType, DataType>,

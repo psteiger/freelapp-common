@@ -6,8 +6,9 @@ import com.freelapp.common.entity.Key
 import com.freelapp.common.entity.User
 import com.freelapp.common.repository.user.UserRepository
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class GetGlobalUsersUseCaseImpl<UserType, DataType>(
+class GetGlobalUsersUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
 ) : GetGlobalUsersUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
                                                     DataType : Item<DataType> {

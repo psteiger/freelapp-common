@@ -9,8 +9,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.mapLatest
+import javax.inject.Inject
 
-class GetAllItemsUseCaseImpl<UserType, DataType>(
+class GetAllItemsUseCaseImpl<UserType, DataType> @Inject constructor(
     private val getAllUsersUseCase: GetAllUsersUseCase<UserType, DataType>
 ) : GetAllItemsUseCase<DataType> where UserType : User<UserType, DataType>,
                                        DataType : Item<DataType> {

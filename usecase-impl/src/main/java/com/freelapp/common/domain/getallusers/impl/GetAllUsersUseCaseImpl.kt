@@ -11,8 +11,9 @@ import com.freelapp.common.entity.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
+import javax.inject.Inject
 
-class GetAllUsersUseCaseImpl<UserType, DataType>(
+class GetAllUsersUseCaseImpl<UserType, DataType> @Inject constructor(
     private val getUserSearchModeUseCase: GetUserSearchModeUseCase,
     private val getNearbyUsersUseCase: GetNearbyUsersUseCase<UserType, DataType>,
     private val getGlobalUsersUseCase: GetGlobalUsersUseCase<UserType, DataType>,

@@ -12,8 +12,9 @@ import com.freelapp.common.repository.user.UserRepository
 import com.freelapp.components.snacker.domain.Snacker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SetUserSearchModeUseCaseImpl<UserType, DataType>(
+class SetUserSearchModeUseCaseImpl<UserType, DataType> @Inject constructor(
     private val scope: CoroutineScope,
     private val getUserSearchRadiusUseCase: GetUserSearchRadiusUseCase,
     private val checkPremiumStatusUseCase: CheckPremiumStatusUseCase,

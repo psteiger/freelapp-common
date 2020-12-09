@@ -7,9 +7,10 @@ import com.freelapp.components.biller.entity.purchase.BillingFlow
 import com.freelapp.components.biller.entity.sku.AcknowledgeableSku
 import com.freelapp.components.biller.entity.sku.SkuContract
 import com.freelapp.components.snacker.domain.Snacker
+import javax.inject.Inject
 import javax.inject.Provider
 
-class BuyPremiumUseCaseImpl(
+class BuyPremiumUseCaseImpl @Inject constructor(
     private val snacker: Snacker,
     private val checkPremiumStatusUseCase: CheckPremiumStatusUseCase,
     private val billingFlow: BillingFlow,
