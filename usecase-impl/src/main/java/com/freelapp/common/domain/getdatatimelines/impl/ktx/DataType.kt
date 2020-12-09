@@ -55,13 +55,13 @@ internal fun <T : TimestampsOwner> Flow<List<T>>.filterInteractedWithBetween(
 
 @ExperimentalCoroutinesApi
 internal fun <T : Item, U : ItemWithStats> Flow<List<T>>.groupEquals(
-    itemWithStatsFactory: ItemWithStats.Factory<U>
+    itemWithStatsFactory: ItemWithStats.Factory<T, U>
 ): Flow<List<U>> =
     mapLatest { items ->
         items
             .groupBy({ it }, { it.timestamp })
             .map { (item, timestamps) ->
-                itemWithStatsFactory.create(item.id, item.name, timestamps)
+                itemWithStatsFactory.create(item, timestamps)
             }
     }
 
