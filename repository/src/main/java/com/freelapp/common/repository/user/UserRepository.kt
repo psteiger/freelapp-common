@@ -1,9 +1,6 @@
 package com.freelapp.common.repository.user
 
-import com.freelapp.common.entity.User
-import com.freelapp.common.entity.Item
-import com.freelapp.common.entity.Key
-import com.freelapp.common.entity.Mode
+import com.freelapp.common.entity.*
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -12,6 +9,7 @@ interface UserRepository<UserType, DataType> where UserType : User<UserType, Dat
 
     val globalUsers: SharedFlow<Map<Key, UserType>>
     val nearbyUsers: SharedFlow<Map<Key, UserType>>
+    val globalUsersPositions: SharedFlow<Map<Key, Pair<Latitude, Longitude>>>
     val searchRadius: StateFlow<Int>
     val searchMode: StateFlow<Mode>
     val searchText: StateFlow<String>
