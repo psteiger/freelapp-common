@@ -27,7 +27,7 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
 
     private fun Flow<List<DataType>>.filtered(): Flow<List<DataType>> =
         combine(getUserSearchFilterUseCase()) { items, text ->
-            if (text.isBlank()) items else items.filterNot { it.matchesQuery(text) }
+            if (text.isBlank()) items else items.filter { it.matchesQuery(text) }
         }.flowOn(Dispatchers.Default)
 
     private fun Flow<List<DataType>>.hideShowOwn(): Flow<List<DataType>> =
