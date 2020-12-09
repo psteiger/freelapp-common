@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/entity" />
             <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/usecase" />
+            <option value="$PROJECT_DIR$/usecase-impl" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

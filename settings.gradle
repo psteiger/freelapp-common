@@ -1,4 +1,5 @@
 rootProject.name = "freelapp-common"
 include ':usecase'
+include ':usecase-impl'
 include ':entity'
 include ':repository'
