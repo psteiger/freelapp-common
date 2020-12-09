@@ -8,13 +8,15 @@ import com.freelapp.common.application.entity.Latitude
 import com.freelapp.common.application.entity.Longitude
 import com.freelapp.common.application.getlocationname.GetLocationName
 import com.google.android.libraries.maps.model.LatLng
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.util.*
+import javax.inject.Inject
 
-class GetLocationNameImpl(
-    private val context: Context,
+class GetLocationNameImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
 ) : GetLocationName {
 
     override suspend fun invoke(

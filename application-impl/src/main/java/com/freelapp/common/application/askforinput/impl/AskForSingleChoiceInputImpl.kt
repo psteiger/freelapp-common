@@ -8,10 +8,11 @@ import com.afollestad.materialdialogs.list.getListAdapter
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.freelapp.common.application.askforinput.AskForSingleChoiceInput
 import kotlinx.coroutines.suspendCancellableCoroutine
+import javax.inject.Inject
 import javax.inject.Provider
 import kotlin.coroutines.resume
 
-class AskForSingleChoiceInputImpl<T>(
+class AskForSingleChoiceInputImpl<T> @Inject constructor(
     private val activity: Activity
 ) : AskForSingleChoiceInput<T> {
 
