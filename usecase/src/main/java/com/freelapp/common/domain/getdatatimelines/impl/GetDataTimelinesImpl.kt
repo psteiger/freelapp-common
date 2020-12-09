@@ -14,15 +14,15 @@ import kotlinx.coroutines.flow.*
 import kotlinx.datetime.Clock
 
 @ExperimentalCoroutinesApi
-class GetDataTimelinesImpl<Owner, DataType>(
+class GetDataTimelinesImpl<UserType, DataType>(
     private val scope: CoroutineScope,
-    private val userRepository: UserRepository<Owner, DataType>,
-    private val currentUserRepository: CurrentUserRepository<Owner, DataType>,
+    private val userRepository: UserRepository<UserType, DataType>,
+    private val currentUserRepository: CurrentUserRepository<UserType, DataType>,
     private val getHideShowOwnDataUseCase: GetHideShowOwnDataUseCase,
     private val getUserSearchFilterUseCase: GetUserSearchFilterUseCase,
     getUserSearchModeUseCase: GetUserSearchModeUseCase
-) : GetDataTimelines<DataType> where Owner : DataOwner<Owner, DataType>,
-                                     DataType : Data<DataType> {
+) : GetDataTimelines<DataType> where UserType : User<UserType, DataType>,
+                                     DataType : Item<DataType> {
 
     override fun invoke(): Map<Timeline, SharedFlow<List<DataType>>> = timelines
 
@@ -34,7 +34,7 @@ class GetDataTimelinesImpl<Owner, DataType>(
         Timeline.MONTH to createTimeline(Timeline.MONTH),
     )
 
-    private val users: Flow<Map<Key, Owner>> =
+    private val users: Flow<Map<Key, UserType>> =
         getUserSearchModeUseCase()
             .flatMapLatest {
                 when (it) {
@@ -55,28 +55,28 @@ class GetDataTimelinesImpl<Owner, DataType>(
             }
             .flowOn(Dispatchers.Default)
 
-    private fun Flow<Map<Key, Owner>>.filtered(): Flow<Map<Key, Owner>> =
+    private fun Flow<Map<Key, UserType>>.filtered(): Flow<Map<Key, UserType>> =
         combine(getUserSearchFilterUseCase()) { users, text ->
             if (text.isNotBlank()) {
-                users.mapValues { (_, owner) ->
-                    val data = owner.data
+                users.mapValues { (_, user) ->
+                    val data = user.data
                     val newData = data.filter { it.matchesQuery(text) }
-                    if (data.size != newData.size) owner.clone(newData) else owner
+                    if (data.size != newData.size) user.clone(newData) else user
                 }
             } else users
         }.flowOn(Dispatchers.Default)
 
-    private fun Flow<Map<Key, Owner>>.hideShowOwnData(): Flow<Map<Key, Owner>> =
+    private fun Flow<Map<Key, UserType>>.hideShowOwnData(): Flow<Map<Key, UserType>> =
         combine(
             this,
             currentUserRepository.user,
             getHideShowOwnDataUseCase()
         ) { users, currentUser, show ->
             if (!show && currentUser != null && currentUser.data.isNotEmpty()) {
-                users.mapValues { (_, owner) ->
+                users.mapValues { (_, user) ->
                     val currentUserData = currentUser.data
-                    val data = owner.data
-                    owner.clone(data - currentUserData.toHashSet())
+                    val data = user.data
+                    user.clone(data - currentUserData.toHashSet())
                 }
             } else users
         }.flowOn(Dispatchers.Default)

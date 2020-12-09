@@ -1,6 +1,6 @@
 package com.freelapp.common.entity
 
-interface Data<T> where T : Data<T> {
+interface Item<T> where T : Item<T> {
     val id: Key
     val name: String
     val freq: Int

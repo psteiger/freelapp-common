@@ -1,14 +1,14 @@
 package com.freelapp.common.domain.usersearchfilter.impl
 
 import com.freelapp.common.domain.usersearchfilter.SetUserSearchFilterUseCase
-import com.freelapp.common.entity.DataOwner
-import com.freelapp.common.entity.Data
+import com.freelapp.common.entity.User
+import com.freelapp.common.entity.Item
 import com.freelapp.common.repository.user.UserRepository
 
-class SetUserSearchFilterUseCaseImpl<Owner, DataType>(
-    private val userRepository: UserRepository<Owner, DataType>
-) : SetUserSearchFilterUseCase where Owner : DataOwner<Owner, DataType>,
-                                     DataType : Data<DataType> {
+class SetUserSearchFilterUseCaseImpl<UserType, DataType>(
+    private val userRepository: UserRepository<UserType, DataType>
+) : SetUserSearchFilterUseCase where UserType : User<UserType, DataType>,
+                                     DataType : Item<DataType> {
 
     override fun invoke(query: String) {
         userRepository.setSearchFilter(query)
