@@ -17,7 +17,7 @@ class BuyPremiumUseCaseImpl @Inject constructor(
     private val snacker: Snacker,
     private val checkPremiumStatusUseCase: CheckPremiumStatusUseCase,
     private val billingFlow: BillingFlow,
-    private val subscriptionSkus: Map<AcknowledgeableSku, Provider<String>>,
+    private val subscriptionSkus: Map<AcknowledgeableSku, @JvmSuppressWildcards Provider<String>>,
     private val askForSingleChoiceInput: AskForSingleChoiceInput<AcknowledgeableSku>,
     @IsAlreadySubscribedString
     private val isAlreadySubscribedMsg: String,
