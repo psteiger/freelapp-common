@@ -10,11 +10,11 @@ interface UserRepository<UserType, DataType> where UserType : User<UserType, Dat
     val nearbyUsers: StateFlow<Map<Key, UserType>>
     val globalUsersPositions: StateFlow<Map<Key, Pair<Latitude, Longitude>>>
     val searchRadius: StateFlow<Int>
-    val searchMode: StateFlow<Mode>
+    val searchMode: StateFlow<SearchMode>
     val searchText: StateFlow<String>
     val hideShowOwnData: StateFlow<Boolean>
 
-    fun setSearchMode(mode: Mode)
+    fun setSearchMode(searchMode: SearchMode)
     fun setSearchFilter(query: String)
     fun setSearchRadius(radius: Int)
     fun setHideShowOwnData(show: Boolean)

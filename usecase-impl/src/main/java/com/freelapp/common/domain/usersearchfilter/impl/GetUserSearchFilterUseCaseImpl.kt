@@ -1,8 +1,8 @@
 package com.freelapp.common.domain.usersearchfilter.impl
 
 import com.freelapp.common.domain.usersearchfilter.GetUserSearchFilterUseCase
-import com.freelapp.common.entity.User
 import com.freelapp.common.entity.Item
+import com.freelapp.common.entity.User
 import com.freelapp.common.repository.user.UserRepository
 import kotlinx.coroutines.flow.StateFlow
 

@@ -1,5 +1,5 @@
 package com.freelapp.common.domain.hideshowowndata
 
-interface SetHideShowOwnDataUseCase {
+fun interface SetHideShowOwnDataUseCase {
     operator fun invoke(show: Boolean)
 }

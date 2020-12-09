@@ -5,7 +5,7 @@ import com.freelapp.common.entity.Key
 import com.freelapp.common.entity.User
 import kotlinx.coroutines.flow.Flow
 
-interface GetAllUsersUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
+fun interface GetAllUsersUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
                                                        DataType : Item<DataType> {
 
     operator fun invoke(): Flow<Map<Key, UserType>>

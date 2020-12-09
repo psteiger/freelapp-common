@@ -6,7 +6,7 @@ import com.freelapp.common.domain.getnearbyusers.GetNearbyUsersUseCase
 import com.freelapp.common.domain.usersearchmode.GetUserSearchModeUseCase
 import com.freelapp.common.entity.Item
 import com.freelapp.common.entity.Key
-import com.freelapp.common.entity.Mode
+import com.freelapp.common.entity.SearchMode
 import com.freelapp.common.entity.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -24,8 +24,9 @@ class GetAllUsersUseCaseImpl<UserType, DataType>(
         getUserSearchModeUseCase()
             .flatMapLatest {
                 when (it) {
-                    Mode.NEARBY -> getNearbyUsersUseCase()
-                    Mode.WORLD -> getGlobalUsersUseCase()
+                    SearchMode.Nearby.Real,
+                    is SearchMode.Nearby.Custom -> getNearbyUsersUseCase()
+                    SearchMode.Worldwide -> getGlobalUsersUseCase()
                 }
             }
  }

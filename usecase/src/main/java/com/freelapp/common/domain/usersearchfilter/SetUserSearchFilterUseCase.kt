@@ -1,5 +1,5 @@
 package com.freelapp.common.domain.usersearchfilter
 
-interface SetUserSearchFilterUseCase {
+fun interface SetUserSearchFilterUseCase {
     operator fun invoke(query: String)
 }

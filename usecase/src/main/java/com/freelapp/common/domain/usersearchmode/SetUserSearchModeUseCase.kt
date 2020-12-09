@@ -1,7 +1,7 @@
 package com.freelapp.common.domain.usersearchmode
 
-import com.freelapp.common.entity.Mode
+import com.freelapp.common.entity.SearchMode
 
-interface SetUserSearchModeUseCase {
-    operator fun invoke(mode: Mode)
+fun interface SetUserSearchModeUseCase {
+    operator fun invoke(searchMode: SearchMode)
 }

@@ -1,12 +1,13 @@
 package com.freelapp.common.domain.getdatatimelines.impl
 
 import com.freelapp.common.domain.getallitems.GetAllItemsUseCase
-import com.freelapp.common.domain.getallusers.GetAllUsersUseCase
 import com.freelapp.common.domain.getcurrentuser.GetCurrentUserUseCase
 import com.freelapp.common.domain.getdatatimelines.GetDataTimelinesUseCase
 import com.freelapp.common.domain.hideshowowndata.GetHideShowOwnDataUseCase
 import com.freelapp.common.domain.usersearchfilter.GetUserSearchFilterUseCase
-import com.freelapp.common.entity.*
+import com.freelapp.common.entity.Item
+import com.freelapp.common.entity.Timeline
+import com.freelapp.common.entity.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

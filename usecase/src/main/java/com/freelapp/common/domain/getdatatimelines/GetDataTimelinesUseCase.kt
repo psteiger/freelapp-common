@@ -4,7 +4,7 @@ import com.freelapp.common.entity.Item
 import com.freelapp.common.entity.Timeline
 import kotlinx.coroutines.flow.StateFlow
 
-interface GetDataTimelinesUseCase<DataType> where DataType : Item<DataType> {
+fun interface GetDataTimelinesUseCase<DataType> where DataType : Item<DataType> {
 
     operator fun invoke(): Map<Timeline, StateFlow<List<DataType>>>
 }
