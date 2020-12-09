@@ -6,7 +6,7 @@ import com.freelapp.common.entity.User
 import kotlinx.coroutines.flow.StateFlow
 
 fun interface GetNearbyUsersUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
-                                                          DataType : Item<DataType> {
+                                                              DataType : Item<DataType> {
 
     operator fun invoke(): StateFlow<Map<Key, UserType>>
 }

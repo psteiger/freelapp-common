@@ -1,7 +1,7 @@
-package com.freelapp.common.domain.subscription
+package com.freelapp.common.domain.premiumuser
 
 import kotlinx.coroutines.flow.StateFlow
 
-interface CheckSubscriptionUseCase {
+fun interface CheckPremiumStatusUseCase {
     operator fun invoke(): StateFlow<Boolean>
 }

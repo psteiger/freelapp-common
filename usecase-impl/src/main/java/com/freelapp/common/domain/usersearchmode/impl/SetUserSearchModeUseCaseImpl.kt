@@ -1,8 +1,8 @@
 package com.freelapp.common.domain.usersearchmode.impl
 
 import com.freelapp.common.application.getlocationname.GetLocationName
-import com.freelapp.common.domain.subscription.CheckSubscriptionUseCase
-import com.freelapp.common.domain.subscription.SubscribeUseCase
+import com.freelapp.common.domain.premiumuser.CheckPremiumStatusUseCase
+import com.freelapp.common.domain.premiumuser.BuyPremiumUseCase
 import com.freelapp.common.domain.usersearchmode.SetUserSearchModeUseCase
 import com.freelapp.common.domain.usersearchradius.GetUserSearchRadiusUseCase
 import com.freelapp.common.entity.Item
@@ -16,8 +16,8 @@ import kotlinx.coroutines.launch
 class SetUserSearchModeUseCaseImpl<UserType, DataType>(
     private val scope: CoroutineScope,
     private val getUserSearchRadiusUseCase: GetUserSearchRadiusUseCase,
-    private val checkSubscriptionUseCase: CheckSubscriptionUseCase,
-    private val subscribeUseCase: SubscribeUseCase,
+    private val checkPremiumStatusUseCase: CheckPremiumStatusUseCase,
+    private val buyPremiumUseCase: BuyPremiumUseCase,
     private val snacker: Snacker,
     private val worldwideString: String,
     private val getLocationName: GetLocationName,
@@ -27,7 +27,7 @@ class SetUserSearchModeUseCaseImpl<UserType, DataType>(
 
     override fun invoke(searchMode: SearchMode) {
         scope.launch {
-            if (checkSubscriptionUseCase().value) {
+            if (checkPremiumStatusUseCase().value) {
                 userRepository.setSearchMode(searchMode)
                 if (searchMode is SearchMode.Nearby.Custom) {
                     getLocationName(
@@ -39,7 +39,7 @@ class SetUserSearchModeUseCaseImpl<UserType, DataType>(
                 } else if (searchMode is SearchMode.Worldwide) {
                     snacker(worldwideString)
                 }
-            } else subscribeUseCase()
+            } else buyPremiumUseCase()
         }
     }
 
