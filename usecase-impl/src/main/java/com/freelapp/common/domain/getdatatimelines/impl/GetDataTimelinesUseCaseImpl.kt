@@ -1,6 +1,7 @@
 package com.freelapp.common.domain.getdatatimelines.impl
 
 import com.freelapp.common.domain.getallitems.GetAllItemsUseCase
+import com.freelapp.common.domain.getappopeningtime.GetAppOpeningTime
 import com.freelapp.common.domain.getcurrentuser.GetCurrentUserUseCase
 import com.freelapp.common.domain.getdatatimelines.GetDataTimelinesUseCase
 import com.freelapp.common.domain.getdatatimelines.impl.ktx.*
@@ -14,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
-import kotlinx.datetime.Clock
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -24,12 +24,13 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType, DataTypeWithStats> @Inject
     getCurrentUserUseCase: GetCurrentUserUseCase<UserType, DataType>,
     getHideShowOwnDataUseCase: GetHideShowOwnDataUseCase,
     getUserSearchFilterUseCase: GetUserSearchFilterUseCase,
-    itemWithStatsFactory: ItemWithStats.Factory<DataType, DataTypeWithStats>
+    itemWithStatsFactory: ItemWithStats.Factory<DataType, DataTypeWithStats>,
+    getAppOpeningTime: GetAppOpeningTime
 ) : GetDataTimelinesUseCase<DataTypeWithStats> where UserType : User<UserType, DataType>,
                                                      DataType : Item,
                                                      DataTypeWithStats : ItemWithStats {
 
-    private val now = Clock.System.now().toEpochMilliseconds()
+    private val now = getAppOpeningTime()
 
     private val filteredItems =
         getAllItemsUseCase()
