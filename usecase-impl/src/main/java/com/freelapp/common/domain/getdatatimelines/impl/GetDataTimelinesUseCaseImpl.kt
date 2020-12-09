@@ -24,15 +24,15 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
 ) : GetDataTimelinesUseCase<DataType> where UserType : User<UserType, DataType>,
                                             DataType : Item<DataType> {
 
-    override fun invoke(): Map<Timeline, SharedFlow<List<DataType>>> = timelines
-
-    private val now = Clock.System.now().toEpochMilliseconds()
-
     private val timelines = mapOf(
         Timeline.DAY to createTimeline(Timeline.DAY),
         Timeline.WEEK to createTimeline(Timeline.WEEK),
         Timeline.MONTH to createTimeline(Timeline.MONTH),
     )
+
+    override fun invoke(): Map<Timeline, SharedFlow<List<DataType>>> = timelines
+
+    private val now = Clock.System.now().toEpochMilliseconds()
 
     private val users: Flow<Map<Key, UserType>> =
         getUserSearchModeUseCase()
@@ -97,7 +97,7 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType>(
             .shareIn(
                 scope,
                 SharingStarted.WhileSubscribed(5000L),
-                0
+                1
             )
 
     private fun DataType?.playedAfter(timeAgo: Timeline): Boolean =
