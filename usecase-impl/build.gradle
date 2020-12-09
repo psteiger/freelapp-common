@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'kotlin'
-    id 'maven'
+    id 'maven-publish'
 }
 
 java {
@@ -12,6 +12,18 @@ java {
 compileKotlin {
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.java
+                artifactId = "$project.name"
+            }
+        }
     }
 }
 

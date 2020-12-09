@@ -1,4 +1,4 @@
-package com.freelapp.common.application.impl.askforinput
+package com.freelapp.common.application.askforinput.impl
 
 import android.app.Activity
 import com.afollestad.materialdialogs.MaterialDialog
