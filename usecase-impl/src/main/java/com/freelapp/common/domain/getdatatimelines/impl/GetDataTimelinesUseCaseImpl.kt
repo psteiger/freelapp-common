@@ -38,28 +38,28 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType, DataTypeWithStats> @Inject
             .groupEquals(itemWithStatsFactory)
             .filterByQueryText(getUserSearchFilterUseCase)
             .flowOn(Dispatchers.Default)
-            .stateIn(
+            .shareIn(
                 scope,
                 SharingStarted.WhileSubscribed(replayExpirationMillis = 0),
-                emptyList()
+                replay = 0
             )
 
-    private fun Timeline.items(scope: CoroutineScope): StateFlow<List<DataTypeWithStats>> =
+    private fun Timeline.items(scope: CoroutineScope): SharedFlow<List<DataTypeWithStats>> =
         filteredItems
             .filterInteractedWithBetween(now, this)
             .sortedByPopularity(now, this)
             .flowOn(Dispatchers.Default)
-            .stateIn(
+            .shareIn(
                 scope,
                 SharingStarted.WhileSubscribed(replayExpirationMillis = 0),
-                emptyList()
+                replay = 0
             )
 
-    private val timelines: Map<Timeline, StateFlow<List<DataTypeWithStats>>> = mapOf(
+    private val timelines: Map<Timeline, SharedFlow<List<DataTypeWithStats>>> = mapOf(
         Timeline.DAY to Timeline.DAY.items(scope),
         Timeline.WEEK to Timeline.WEEK.items(scope),
         Timeline.MONTH to Timeline.MONTH.items(scope),
     )
 
-    override fun invoke(): Map<Timeline, StateFlow<List<DataTypeWithStats>>> = timelines
+    override fun invoke(): Map<Timeline, SharedFlow<List<DataTypeWithStats>>> = timelines
 }
