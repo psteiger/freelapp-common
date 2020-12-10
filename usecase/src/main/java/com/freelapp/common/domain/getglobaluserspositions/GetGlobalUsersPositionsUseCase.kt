@@ -3,9 +3,9 @@ package com.freelapp.common.domain.getglobaluserspositions
 import com.freelapp.common.entity.Key
 import com.freelapp.common.entity.Latitude
 import com.freelapp.common.entity.Longitude
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 fun interface GetGlobalUsersPositionsUseCase {
 
-    operator fun invoke(): StateFlow<Map<Key, Pair<Latitude, Longitude>>>
+    operator fun invoke(): SharedFlow<Map<Key, Pair<Latitude, Longitude>>>
 }

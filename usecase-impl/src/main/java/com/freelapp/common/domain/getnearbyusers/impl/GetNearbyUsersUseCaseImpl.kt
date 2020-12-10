@@ -5,7 +5,7 @@ import com.freelapp.common.entity.item.Item
 import com.freelapp.common.entity.Key
 import com.freelapp.common.entity.User
 import com.freelapp.common.repository.user.UserRepository
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
 class GetNearbyUsersUseCaseImpl<UserType, DataType> @Inject constructor(
@@ -13,6 +13,6 @@ class GetNearbyUsersUseCaseImpl<UserType, DataType> @Inject constructor(
 ) : GetNearbyUsersUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
                                                     DataType : Item {
 
-    override fun invoke(): StateFlow<Map<Key, UserType>> =
+    override fun invoke(): SharedFlow<Map<Key, UserType>> =
         userRepository.nearbyUsers
 }

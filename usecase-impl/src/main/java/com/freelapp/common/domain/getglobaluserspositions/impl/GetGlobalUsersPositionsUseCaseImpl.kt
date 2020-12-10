@@ -4,7 +4,7 @@ import com.freelapp.common.domain.getglobaluserspositions.GetGlobalUsersPosition
 import com.freelapp.common.entity.*
 import com.freelapp.common.entity.item.Item
 import com.freelapp.common.repository.user.UserRepository
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
 class GetGlobalUsersPositionsUseCaseImpl<UserType, DataType> @Inject constructor(
@@ -12,6 +12,6 @@ class GetGlobalUsersPositionsUseCaseImpl<UserType, DataType> @Inject constructor
 ) : GetGlobalUsersPositionsUseCase where UserType : User<UserType, DataType>,
                                          DataType : Item {
 
-    override fun invoke(): StateFlow<Map<Key, Pair<Latitude, Longitude>>> =
+    override fun invoke(): SharedFlow<Map<Key, Pair<Latitude, Longitude>>> =
         userRepository.globalUsersPositions
 }
