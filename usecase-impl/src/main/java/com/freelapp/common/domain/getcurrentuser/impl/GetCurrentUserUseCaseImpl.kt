@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class GetCurrentUserUseCaseImpl<UserType, DataType> @Inject constructor(
     private val currentUserRepository: CurrentUserRepository<UserType, DataType>
-) : GetCurrentUserUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
+) : GetCurrentUserUseCase<UserType, DataType> where UserType : User<DataType>,
                                                     DataType : Item {
 
     override fun invoke(): SharedFlow<UserType?> = currentUserRepository.user

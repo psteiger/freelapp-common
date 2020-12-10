@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class SetUserSearchRadiusUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
-) : SetUserSearchRadiusUseCase where UserType : User<UserType, DataType>,
+) : SetUserSearchRadiusUseCase where UserType : User<DataType>,
                                      DataType : Item {
 
     override fun invoke(radius: Int) {

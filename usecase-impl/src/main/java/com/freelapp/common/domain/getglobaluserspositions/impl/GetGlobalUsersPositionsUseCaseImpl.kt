@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class GetGlobalUsersPositionsUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
-) : GetGlobalUsersPositionsUseCase where UserType : User<UserType, DataType>,
+) : GetGlobalUsersPositionsUseCase where UserType : User<DataType>,
                                          DataType : Item {
 
     override fun invoke(): SharedFlow<Map<Key, Pair<Latitude, Longitude>>> =

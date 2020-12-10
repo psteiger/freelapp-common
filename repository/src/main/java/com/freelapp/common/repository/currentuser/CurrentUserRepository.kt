@@ -4,7 +4,7 @@ import com.freelapp.common.entity.item.Item
 import com.freelapp.common.entity.User
 import kotlinx.coroutines.flow.SharedFlow
 
-interface CurrentUserRepository<UserType, DataType> where UserType : User<UserType, DataType>,
+interface CurrentUserRepository<UserType, DataType> where UserType : User<DataType>,
                                                           DataType : Item {
     val user: SharedFlow<UserType?>
 }

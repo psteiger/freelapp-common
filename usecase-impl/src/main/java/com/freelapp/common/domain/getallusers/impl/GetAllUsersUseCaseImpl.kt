@@ -17,7 +17,7 @@ class GetAllUsersUseCaseImpl<UserType, DataType> @Inject constructor(
     private val getUserSearchModeUseCase: GetUserSearchModeUseCase,
     private val getNearbyUsersUseCase: GetNearbyUsersUseCase<UserType, DataType>,
     private val getGlobalUsersUseCase: GetGlobalUsersUseCase<UserType, DataType>,
-) : GetAllUsersUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
+) : GetAllUsersUseCase<UserType, DataType> where UserType : User<DataType>,
                                                  DataType : Item {
 
     @ExperimentalCoroutinesApi

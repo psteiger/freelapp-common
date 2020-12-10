@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class GetHideShowOwnDataUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
-) : GetHideShowOwnDataUseCase where UserType : User<UserType, DataType>,
+) : GetHideShowOwnDataUseCase where UserType : User<DataType>,
                                     DataType : Item {
 
     override fun invoke(): StateFlow<Boolean> = userRepository.hideShowOwnData

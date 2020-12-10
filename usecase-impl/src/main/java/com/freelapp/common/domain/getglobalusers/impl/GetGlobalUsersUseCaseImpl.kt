@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class GetGlobalUsersUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
-) : GetGlobalUsersUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
+) : GetGlobalUsersUseCase<UserType, DataType> where UserType : User<DataType>,
                                                     DataType : Item {
 
     override fun invoke(): SharedFlow<Map<Key, UserType>> =

@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class GetNearbyUsersUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
-) : GetNearbyUsersUseCase<UserType, DataType> where UserType : User<UserType, DataType>,
+) : GetNearbyUsersUseCase<UserType, DataType> where UserType : User<DataType>,
                                                     DataType : Item {
 
     override fun invoke(): SharedFlow<Map<Key, UserType>> =

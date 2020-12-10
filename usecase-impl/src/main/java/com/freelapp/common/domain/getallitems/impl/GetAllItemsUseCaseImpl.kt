@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class GetAllItemsUseCaseImpl<UserType, DataType> @Inject constructor(
     private val getAllUsersUseCase: GetAllUsersUseCase<UserType, DataType>
-) : GetAllItemsUseCase<DataType> where UserType : User<UserType, DataType>,
+) : GetAllItemsUseCase<DataType> where UserType : User<DataType>,
                                        DataType : Item {
 
     @ExperimentalCoroutinesApi

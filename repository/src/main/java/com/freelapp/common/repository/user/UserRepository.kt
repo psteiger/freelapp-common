@@ -5,7 +5,7 @@ import com.freelapp.common.entity.item.Item
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
-interface UserRepository<UserType, DataType> where UserType : User<UserType, DataType>,
+interface UserRepository<UserType, DataType> where UserType : User<DataType>,
                                                    DataType : Item {
 
     val globalUsers: SharedFlow<Map<Key, UserType>>

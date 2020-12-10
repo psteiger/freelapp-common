@@ -26,7 +26,7 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType, DataTypeWithStats> @Inject
     getUserSearchFilterUseCase: GetUserSearchFilterUseCase,
     itemWithStatsFactory: ItemWithStats.Factory<DataType, DataTypeWithStats>,
     getAppOpeningTime: GetAppOpeningTime
-) : GetDataTimelinesUseCase<DataTypeWithStats> where UserType : User<UserType, DataType>,
+) : GetDataTimelinesUseCase<DataTypeWithStats> where UserType : User<DataType>,
                                                      DataType : Item,
                                                      DataTypeWithStats : ItemWithStats {
 

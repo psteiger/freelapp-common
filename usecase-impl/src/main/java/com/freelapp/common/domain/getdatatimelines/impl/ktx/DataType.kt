@@ -22,7 +22,7 @@ internal fun <T : ItemBase> Flow<List<T>>.filterByQueryText(
         if (text.isBlank()) items else items.filter { it.matchesQuery(text) }
     }.flowOn(Dispatchers.Default)
 
-internal fun <U : User<U, T>, T : Item> Flow<List<T>>.hideShowOwn(
+internal fun <U : User<T>, T : Item> Flow<List<T>>.hideShowOwn(
     getCurrentUserUseCase: GetCurrentUserUseCase<U, T>,
     getHideShowOwnDataUseCase: GetHideShowOwnDataUseCase
 ): Flow<List<T>> =
@@ -41,17 +41,6 @@ internal fun <T : TimestampsOwner> Flow<List<T>>.filterInteractedWithBetween(
     mapLatest { items ->
         items.filter { it.freq(now, timeline) > 0 }
     }
-
-//@ExperimentalCoroutinesApi
-//internal fun <T : TimestampOwner> Flow<List<T>>.filterInteractedWithBetween(
-//    now: Long,
-//    timeline: Timeline
-//): Flow<List<T>> = mapLatest { it.filterInteractedWithBetween(now, timeline) }
-
-//internal fun <T : TimestampOwner> List<T>.filterInteractedWithBetween(
-//    now: Long,
-//    timeline: Timeline
-//): List<T> = filter { it.interactedWithBetween(now, timeline) }
 
 @ExperimentalCoroutinesApi
 internal fun <T : Item, U : ItemWithStats> Flow<List<T>>.groupEquals(
@@ -75,13 +64,3 @@ internal fun <T : ItemWithStats> Flow<List<T>>.sortedByPopularity(
             .sortedWith(compareBy({ it.freq(now, timeline) }, { it.name }))
             .reversed()
     }
-
-//private fun <T : TimestampOwner> T?.interactedWithBetween(
-//    now: Long,
-//    timeAgo: Timeline
-//): Boolean = this?.timestamp?.interactedWithBetween(now, timeAgo) ?: false
-
-private fun Long.interactedWithBetween(
-    now: Long,
-    timeAgo: Timeline
-): Boolean = now - this < timeAgo.toMs()

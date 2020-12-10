@@ -25,7 +25,7 @@ class SetUserSearchModeUseCaseImpl<UserType, DataType> @Inject constructor(
     private val worldwideString: String,
     private val getLocationName: GetLocationName,
     private val userRepository: UserRepository<UserType, DataType>
-) : SetUserSearchModeUseCase where UserType : User<UserType, DataType>,
+) : SetUserSearchModeUseCase where UserType : User<DataType>,
                                    DataType : Item {
 
     override fun invoke(searchMode: SearchMode) {

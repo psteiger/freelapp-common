@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class GetUserSearchModeUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
-) : GetUserSearchModeUseCase where UserType : User<UserType, DataType>,
+) : GetUserSearchModeUseCase where UserType : User<DataType>,
                                    DataType : Item {
 
     override fun invoke(): StateFlow<SearchMode> = userRepository.searchMode

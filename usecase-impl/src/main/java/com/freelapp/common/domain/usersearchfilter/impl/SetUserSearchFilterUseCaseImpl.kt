@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class SetUserSearchFilterUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
-) : SetUserSearchFilterUseCase where UserType : User<UserType, DataType>,
+) : SetUserSearchFilterUseCase where UserType : User<DataType>,
                                      DataType : Item {
 
     override fun invoke(query: String) {

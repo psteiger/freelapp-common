@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class SetHideShowOwnDataUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
-) : SetHideShowOwnDataUseCase where UserType : User<UserType, DataType>,
+) : SetHideShowOwnDataUseCase where UserType : User<DataType>,
                                     DataType : Item {
 
     override fun invoke(show: Boolean) {

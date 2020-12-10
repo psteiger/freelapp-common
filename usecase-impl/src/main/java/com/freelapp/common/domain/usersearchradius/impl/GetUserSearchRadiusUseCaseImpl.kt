@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class GetUserSearchRadiusUseCaseImpl<UserType, DataType> @Inject constructor(
     private val userRepository: UserRepository<UserType, DataType>
-) : GetUserSearchRadiusUseCase where UserType : User<UserType, DataType>,
+) : GetUserSearchRadiusUseCase where UserType : User<DataType>,
                                      DataType : Item {
 
     override fun invoke(): StateFlow<Int> = userRepository.searchRadius
