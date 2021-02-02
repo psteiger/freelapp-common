@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class GetDataTimelinesUseCaseImpl<UserType, DataType, DataTypeWithStats> @Inject constructor(
+open class GetDataTimelinesUseCaseImpl<UserType, DataType, DataTypeWithStats> @Inject constructor(
     scope: CoroutineScope,
     getAllItemsUseCase: GetAllItemsUseCase<DataType>,
     getCurrentUserUseCase: GetCurrentUserUseCase<UserType, DataType>,
@@ -32,7 +32,7 @@ class GetDataTimelinesUseCaseImpl<UserType, DataType, DataTypeWithStats> @Inject
 
     private val now = getAppOpeningTime()
 
-    private val filteredItems =
+    open val filteredItems =
         getAllItemsUseCase()
             .hideShowOwn(getCurrentUserUseCase, getHideShowOwnDataUseCase)
             .groupEquals(itemWithStatsFactory)
