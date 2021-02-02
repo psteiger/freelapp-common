@@ -14,8 +14,10 @@
             <option value="$PROJECT_DIR$/application-impl" />
             <option value="$PROJECT_DIR$/entity" />
             <option value="$PROJECT_DIR$/repository" />
+            <option value="$PROJECT_DIR$/repository-impl" />
             <option value="$PROJECT_DIR$/usecase" />
             <option value="$PROJECT_DIR$/usecase-impl" />
+            <option value="$PROJECT_DIR$/view" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
