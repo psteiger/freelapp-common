@@ -22,7 +22,7 @@ import com.google.firebase.database.GenericTypeIndicator
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-class NearbyUsersRepositoryImpl<UserDaoType, UserType, DataType>(
+open class NearbyUsersRepositoryImpl<UserDaoType, UserType, DataType>(
     private val locationSource: LocationSource,
     geoFire: GeoFire,
     context: Context,
