@@ -27,7 +27,7 @@ open class NearbyUsersRepositoryImpl<UserDaoType, UserType, DataType>(
     geoFire: GeoFire,
     context: Context,
     private val clazz: Class<UserDaoType>,
-    private val userDaoToUserMapper: UserDaoType.(Pair<Latitude, Longitude>) -> UserType
+    private val userDaoToUserMapper: UserDaoType.(Pair<Latitude, Longitude>) -> UserType?
 ) : UserRepository<UserType, DataType> where UserType : User<DataType>,
                                              DataType : Item,
                                              UserDaoType : Any {
