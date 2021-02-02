@@ -11,8 +11,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.cursoradapter.widget.SimpleCursorAdapter
 import com.freelapp.common.domain.getallitems.GetAllItemsUseCase
+import com.freelapp.common.domain.getappopeningtime.GetAppOpeningTime
 import com.freelapp.common.domain.usersearchfilter.GetUserSearchFilterUseCase
 import com.freelapp.common.domain.usersearchfilter.SetUserSearchFilterUseCase
+import com.freelapp.common.entity.Timeline
 import com.freelapp.common.entity.item.Item
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.first
@@ -25,7 +27,10 @@ class SearchViewManager<DataType : Item> @Inject constructor(
     private val getUserSearchFilterUseCase: GetUserSearchFilterUseCase,
     private val setUserSearchFilterUseCase: SetUserSearchFilterUseCase,
     private val componentName: ComponentName,
+    getAppOpeningTime: GetAppOpeningTime
 ) {
+
+    private val now = getAppOpeningTime()
 
     fun setupSearchView(searchView: SearchView) {
         searchView.apply {
@@ -43,9 +48,15 @@ class SearchViewManager<DataType : Item> @Inject constructor(
                     intArrayOf(android.R.id.text1),
                     CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
                 ).apply {
-                    setFilterQueryProvider {
-                        val items = runBlocking { getAllItemsUseCase().first().toSet() }
-                        val query = it.toString()
+                    setFilterQueryProvider { charSequence ->
+                        val items = runBlocking {
+                            getAllItemsUseCase()
+                                .first()
+                                .toSet()
+                                .filter { now - it.timestamp < Timeline.MONTH_IN_MILLISECONDS }
+                                .toSet()
+                        }
+                        val query = charSequence.toString()
                         setUserSearchFilterUseCase(query)
                         populateSuggestions(items, query)
                     }
@@ -68,11 +79,11 @@ class SearchViewManager<DataType : Item> @Inject constructor(
         }
     }
 
-    private fun populateSuggestions(tracks: Set<DataType>, text: String): Cursor =
+    private fun populateSuggestions(items: Set<DataType>, text: String): Cursor =
         MatrixCursor(arrayOf(BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1))
             .apply {
-                tracks.forEachIndexed { index, track ->
-                    if (track.matchesQuery(text)) addRow(arrayOf(index, track.name))
+                items.forEachIndexed { index, item ->
+                    if (item.matchesQuery(text)) addRow(arrayOf(index, item.name))
                 }
             }
 }

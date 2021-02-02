@@ -32,16 +32,16 @@ open class NearbyUsersRepositoryImpl<UserDaoType, UserType, DataType>(
                                              DataType : Item,
                                              UserDaoType : Any {
 
-    private val _showMyTracksFlow = MutableStateFlow(true)
-    private var _showMyTracks: Boolean by context.applicationContext.persist(_showMyTracksFlow)
-    override val hideShowOwnData = _showMyTracksFlow.asStateFlow()
+    private val _showMyItemsFlow = MutableStateFlow(true)
+    private var _showMyItems: Boolean by context.applicationContext.persist(_showMyItemsFlow)
+    override val hideShowOwnData = _showMyItemsFlow.asStateFlow()
     override fun setHideShowOwnData(show: Boolean) {
-        _showMyTracks = show
+        _showMyItems = show
     }
 
     private val _searchRadiusFlow = MutableStateFlow(300)
     private var _searchRadius: Int by context.applicationContext.persist(_searchRadiusFlow)
-    override val searchRadius = _searchRadiusFlow.asStateFlow()
+    final override val searchRadius = _searchRadiusFlow.asStateFlow()
     override fun setSearchRadius(radius: Int) {
         _searchRadius = radius
     }
@@ -98,7 +98,7 @@ open class NearbyUsersRepositoryImpl<UserDaoType, UserType, DataType>(
                 .mapValues { (_, user) -> user as UserType }
         }.flowOn(Dispatchers.Default)
 
-    override val globalUsersPositions: SharedFlow<Map<Key, Pair<Latitude, Longitude>>> =
+    final override val globalUsersPositions: SharedFlow<Map<Key, Pair<Latitude, Longitude>>> =
         DataFlow("geofire")
             .singleValue
             .filterNotNull()

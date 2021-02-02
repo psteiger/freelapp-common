@@ -11,8 +11,8 @@ enum class Timeline {
 
     companion object {
         private const val ONE_HOUR_IN_MILLISECONDS = (60 * 60 * 1000).toLong()
-        private const val DAY_IN_MILLISECONDS = ONE_HOUR_IN_MILLISECONDS * 24
-        private const val MONTH_IN_MILLISECONDS = DAY_IN_MILLISECONDS * 30
-        private const val WEEK_IN_MILLISECONDS = DAY_IN_MILLISECONDS * 7
+        const val DAY_IN_MILLISECONDS = ONE_HOUR_IN_MILLISECONDS * 24
+        const val MONTH_IN_MILLISECONDS = DAY_IN_MILLISECONDS * 30
+        const val WEEK_IN_MILLISECONDS = DAY_IN_MILLISECONDS * 7
     }
 }
