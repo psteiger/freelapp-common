@@ -4,11 +4,11 @@ buildscript {
         kotlin_version = '1.4.21'
         kotlin_coroutines_version = '1.4.2'
         material_dialogs_version = '3.3.0'
-        biller_version = 'd108905c99'
+        biller_version = '57227b735d'
         snacker_version = '36e33f8548'
         maps_version = '3.1.0-beta'
         hilt_version = '2.31.2-alpha'
-        locationfetcher_version = '5.21'
+        locationfetcher_version = '5.22'
         lifecycle_version = '2.2.0'
         flowlifecycleobserver_version = '0.2.1'
     }
