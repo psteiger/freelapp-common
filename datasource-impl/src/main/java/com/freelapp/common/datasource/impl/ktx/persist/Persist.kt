@@ -1,4 +1,4 @@
-package com.freelapp.components.repository.impl.ktx.persist
+package com.freelapp.common.datasource.impl.ktx.persist
 
 import android.content.Context
 import android.content.SharedPreferences

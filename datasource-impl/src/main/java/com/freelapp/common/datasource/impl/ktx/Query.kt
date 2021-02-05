@@ -1,4 +1,4 @@
-package com.freelapp.components.repository.impl.ktx
+package com.freelapp.common.datasource.impl.ktx
 
 import com.freelapp.common.application.ktx.tryOffer
 import com.freelapp.common.entity.Key

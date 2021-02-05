@@ -1,4 +1,4 @@
-package com.freelapp.components.repository.impl.ktx
+package com.freelapp.common.datasource.impl.ktx
 
 import com.freelapp.common.application.ktx.tryOffer
 import com.freelapp.common.entity.Key
@@ -78,7 +78,6 @@ internal fun ValueEventListener(block: ValueEventListenerBuilder.() -> Unit) =
 internal fun ChildEventListener(block: ChildEventListenerBuilder.() -> Unit) =
     ChildEventListenerBuilder().apply(block).build()
 
-
 inline fun <reified T : Any> DataSnapshot.getTypedValue(): T =
     getValue(object : GenericTypeIndicator<T>() {})!!
 
@@ -90,16 +89,3 @@ suspend inline fun Query.getSnapshot() = withContext(Dispatchers.IO) {
         }
     }
 }
-
-@ExperimentalCoroutinesApi
-fun DatabaseReference.asDataSnapshotFlow(): Flow<DataSnapshot> = callbackFlow {
-    val listener = addValueEventListener {
-        onDataChange { tryOffer(this) }
-        onCancelled { cancel(CancellationException("API Error", toException())) }
-    }
-    awaitClose { removeEventListener(listener) }
-}
-
-@ExperimentalCoroutinesApi
-fun Key.asDataSnapshotFlow(ref: String): Flow<DataSnapshot> =
-    FirebaseDatabase.getInstance().getReference(ref).child(this).asDataSnapshotFlow()

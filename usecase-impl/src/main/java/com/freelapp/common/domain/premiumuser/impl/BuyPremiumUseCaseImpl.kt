@@ -1,9 +1,9 @@
 package com.freelapp.common.domain.premiumuser.impl
 
+import com.freelapp.common.annotation.ChooseSubscriptionPlanMessageString
+import com.freelapp.common.annotation.ChooseSubscriptionPlanTitleString
+import com.freelapp.common.annotation.IsAlreadySubscribedString
 import com.freelapp.common.application.askforinput.AskForSingleChoiceInput
-import com.freelapp.common.domain.annotation.ChooseSubscriptionPlanMessageString
-import com.freelapp.common.domain.annotation.ChooseSubscriptionPlanTitleString
-import com.freelapp.common.domain.annotation.IsAlreadySubscribedString
 import com.freelapp.common.domain.premiumuser.CheckPremiumStatusUseCase
 import com.freelapp.common.domain.premiumuser.BuyPremiumUseCase
 import com.freelapp.components.biller.entity.purchase.BillingFlow

@@ -1,4 +1,4 @@
-package com.freelapp.common.domain.annotation
+package com.freelapp.common.annotation
 
 import javax.inject.Qualifier
 
