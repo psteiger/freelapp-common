@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class DataFlow constructor(
     private val query: Query,
@@ -26,18 +27,18 @@ class DataFlow constructor(
         config?.invoke(query)
     }
 
-    val singleValue: Flow<DataSnapshot?> get() =
-        flow { emit(query.getSnapshot()) }
+    val singleValue: Flow<DataSnapshot?>
+        get() = flow { emit(query.getSnapshot()) }
 
     @ExperimentalCoroutinesApi
-    val value: Flow<DataSnapshot> get() =
-        query
+    val value: Flow<DataSnapshot>
+        get() = query
             .asDataSnapshotFlow()
             .flowOn(Dispatchers.IO)
 
     @ExperimentalCoroutinesApi
-    val children: Flow<Map<Key, DataSnapshot>> get() =
-        query
+    val children: Flow<Map<Key, DataSnapshot>>
+        get() = query
             .childrenAsFlow()
             .flowOn(Dispatchers.IO)
 }
