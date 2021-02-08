@@ -1,7 +1,6 @@
 package com.freelapp.components.repository.impl
 
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ProcessLifecycleOwner
 import com.freelapp.common.datasource.NearbyUsersDataSource
 import com.freelapp.common.datasource.OptionsDataSource
 import com.freelapp.common.entity.*
