@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
-class CurrentUserRepositoryImpl<UserType, DataType> @Inject constructor(
+open class CurrentUserRepositoryImpl<UserType, DataType> @Inject constructor(
     scope: CoroutineScope,
     currentUserDataSource: CurrentUserDataSource<UserType, DataType>,
 ) : CurrentUserRepository<UserType, DataType> where UserType : User<DataType>,
