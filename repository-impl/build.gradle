@@ -36,6 +36,7 @@ dependencies {
     implementation project(path: ':datasource')
     implementation project(path: ':entity')
     implementation "javax.inject:javax.inject:1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "com.github.psteiger:locationfetcher:$locationfetcher_version"
     implementation "com.github.psteiger:flow-lifecycle-observer:$flowlifecycleobserver_version"
