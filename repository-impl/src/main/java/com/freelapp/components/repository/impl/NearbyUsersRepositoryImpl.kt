@@ -1,5 +1,6 @@
 package com.freelapp.components.repository.impl
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.freelapp.common.datasource.NearbyUsersDataSource
 import com.freelapp.common.datasource.OptionsDataSource
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 open class NearbyUsersRepositoryImpl<UserType, DataType> @Inject constructor(
+    lifecycleOwner: LifecycleOwner,
     locationSource: LocationSource,
     private val optionsDataSource: OptionsDataSource,
     private val nearbyUsersDataSource: NearbyUsersDataSource<UserType, DataType>
@@ -61,6 +63,6 @@ open class NearbyUsersRepositoryImpl<UserType, DataType> @Inject constructor(
             optionsDataSource.searchRadius
         ) { location, radius ->
             nearbyUsersDataSource.queryAtLocation(location.latitude to location.longitude, radius)
-        }.collectWhileStartedIn(ProcessLifecycleOwner.get())
+        }.collectWhileStartedIn(lifecycleOwner)
     }
 }

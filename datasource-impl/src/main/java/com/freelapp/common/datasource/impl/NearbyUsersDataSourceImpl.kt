@@ -4,7 +4,6 @@ import com.firebase.geofire.GeoFire
 import com.firebase.geofire.GeoLocation
 import com.firebase.geofire.GeoQuery
 import com.freelapp.common.datasource.NearbyUsersDataSource
-import com.freelapp.common.annotation.ApplicationCoroutineScope
 import com.freelapp.common.datasource.impl.ktx.DataFlow
 import com.freelapp.common.datasource.impl.ktx.getSnapshot
 import com.freelapp.common.entity.*
@@ -19,7 +18,7 @@ import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 open class NearbyUsersDataSourceImpl<UserDaoType, UserType, DataType> @Inject constructor(
-    @ApplicationCoroutineScope private val scope: CoroutineScope,
+    private val scope: CoroutineScope,
     private val db: FirebaseDatabase,
     private val geoFire: GeoFire,
     private val clazz: Class<UserDaoType>,

@@ -1,6 +1,5 @@
 package com.freelapp.common.domain.usersearchmode.impl
 
-import com.freelapp.common.annotation.ApplicationCoroutineScope
 import com.freelapp.common.annotation.WorldwideString
 import com.freelapp.common.application.getlocationname.GetLocationName
 import com.freelapp.common.domain.premiumuser.CheckPremiumStatusUseCase
@@ -17,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SetUserSearchModeUseCaseImpl<UserType, DataType> @Inject constructor(
-    @ApplicationCoroutineScope private val scope: CoroutineScope,
+    private val scope: CoroutineScope,
     private val getUserSearchRadiusUseCase: GetUserSearchRadiusUseCase,
     private val checkPremiumStatusUseCase: CheckPremiumStatusUseCase,
     private val buyPremiumUseCase: BuyPremiumUseCase,
