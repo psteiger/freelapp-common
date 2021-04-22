@@ -5,8 +5,6 @@
       <module name="freelapp-common.app" target="11" />
       <module name="freelapp-common.application-impl" target="11" />
       <module name="freelapp-common.datasource-impl" target="11" />
-      <module name="freelapp-common.repository-impl" target="11" />
-      <module name="freelapp-common.view" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

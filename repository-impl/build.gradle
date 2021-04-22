@@ -1,22 +1,12 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
+    id 'java-library'
+    id 'kotlin'
     id 'maven-publish'
 }
 
-android {
-    compileSdkVersion 30
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 afterEvaluate {
@@ -24,7 +14,7 @@ afterEvaluate {
         publications {
             // Creates a Maven publication called "release".
             release(MavenPublication) {
-                from components.release
+                from components.java
                 artifactId = "$project.name"
             }
         }
@@ -32,12 +22,10 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation project(path: ':repository')
+    api project(path: ':repository')
+    api project(path: ':entity')
     implementation project(path: ':datasource')
-    implementation project(path: ':entity')
+    implementation project(path: ':application')
     implementation "javax.inject:javax.inject:1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
-    implementation "com.github.psteiger:locationfetcher:$locationfetcher_version"
-    implementation "com.github.psteiger:flow-lifecycle-observer:$flowlifecycleobserver_version"
 }

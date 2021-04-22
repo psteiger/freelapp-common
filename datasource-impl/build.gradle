@@ -40,6 +40,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation "com.github.psteiger:locationfetcher:$locationfetcher_version"
-    implementation 'com.firebase:geofire-android:3.0.0'
+    implementation 'com.firebase:geofire-android:3.1.0'
     implementation 'com.github.psteiger:geofire-ktx:0.4.1'
 }

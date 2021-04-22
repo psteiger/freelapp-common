@@ -1,19 +1,18 @@
 package com.freelapp.components.repository.impl
 
-import androidx.lifecycle.LifecycleOwner
+import com.freelapp.common.application.updatelocation.LifecycleCollector
+import com.freelapp.common.datasource.LocationDataSource
 import com.freelapp.common.datasource.NearbyUsersDataSource
 import com.freelapp.common.datasource.OptionsDataSource
 import com.freelapp.common.entity.*
 import com.freelapp.common.entity.item.Item
 import com.freelapp.common.repository.user.UserRepository
-import com.freelapp.flowlifecycleobserver.collectWhileStartedIn
-import com.freelapp.libs.locationfetcher.LocationSource
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 open class NearbyUsersRepositoryImpl<UserType, DataType> @Inject constructor(
-    lifecycleOwner: LifecycleOwner,
-    locationSource: LocationSource,
+    lifecycleCollector: LifecycleCollector,
+    locationDataSource: LocationDataSource,
     private val optionsDataSource: OptionsDataSource,
     private val nearbyUsersDataSource: NearbyUsersDataSource<UserType, DataType>
 ) : UserRepository<UserType, DataType> where UserType : User<DataType>,
@@ -56,12 +55,14 @@ open class NearbyUsersRepositoryImpl<UserType, DataType> @Inject constructor(
         optionsDataSource.setHideShowOwnData(show)
     }
 
+    override fun queryAtLocation(location: Pair<Latitude, Longitude>, radius: Int) {
+        nearbyUsersDataSource.queryAtLocation(location, radius)
+    }
+
     init {
-        combine(
-            locationSource.location.filterNotNull(),
-            optionsDataSource.searchRadius
-        ) { location, radius ->
-            nearbyUsersDataSource.queryAtLocation(location.latitude to location.longitude, radius)
-        }.collectWhileStartedIn(lifecycleOwner)
+        val flow = combine(locationDataSource.location, optionsDataSource.searchRadius) { loc, r ->
+            nearbyUsersDataSource.queryAtLocation(loc, r)
+        }
+        lifecycleCollector(flow)
     }
 }

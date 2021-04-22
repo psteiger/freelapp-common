@@ -39,4 +39,5 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "com.google.android.libraries.maps:maps:$maps_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 }

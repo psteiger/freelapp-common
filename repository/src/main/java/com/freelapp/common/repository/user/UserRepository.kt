@@ -20,4 +20,6 @@ interface UserRepository<UserType, DataType> where UserType : User<DataType>,
     fun setSearchFilter(query: String)
     fun setSearchRadius(radius: Int)
     fun setHideShowOwnData(show: Boolean)
+
+    fun queryAtLocation(location: Pair<Latitude, Longitude>, radius: Int)
 }
